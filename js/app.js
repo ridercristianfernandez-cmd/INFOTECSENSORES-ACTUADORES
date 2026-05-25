@@ -288,18 +288,21 @@ const App = (() => {
         document.getElementById('navSearch').value = value;
         document.getElementById('heroSearch').value = value;
         document.getElementById('mobileSearch').value = value;
-        if (currentView === 'cards') renderCards(currentCategory, value);
     }
 
     function handleSearchEnter() {
         const val = document.getElementById('heroSearch').value.trim().toLowerCase();
         if (!val) return;
-        const found = allItems.find(i => i.name.toLowerCase().includes(val) || i.fullName.toLowerCase().includes(val) || i.id.toLowerCase().includes(val));
-        if (found) { openDetail(found.id, found.category); } 
-        else {
-            const sensorMatch = sensores.some(i => i.name.toLowerCase().includes(val) || i.fullName.toLowerCase().includes(val));
-            showView('cards', sensorMatch ? 'sensores' : 'actuadores');
-            setTimeout(() => renderCards(currentCategory, val), 100);
+        
+        // Buscar SOLO en el título principal (name) - coincidencia parcial
+        const found = allItems.find(i => i.name.toLowerCase().includes(val));
+        
+        if (found) {
+            // Abrir directamente la ficha de detalles
+            openDetail(found.id, found.category);
+        } else {
+            // Si no encuentra, mostrar mensaje
+            showToast('No se encontró el elemento buscado');
         }
     }
 
