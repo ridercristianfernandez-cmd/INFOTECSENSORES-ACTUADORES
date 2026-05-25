@@ -1,0 +1,159 @@
+/* ===== RESET & BASE ===== */
+* { margin: 0; padding: 0; box-sizing: border-box; }
+body { background: #050505; color: #fff; font-family: 'Inter', sans-serif; overflow-x: hidden; }
+::selection { background: #00FF88; color: #000; }
+::-webkit-scrollbar { width: 6px; }
+::-webkit-scrollbar-track { background: #0a0a0a; }
+::-webkit-scrollbar-thumb { background: #00FF88; border-radius: 3px; }
+::-webkit-scrollbar-thumb:hover { background: #00cc6a; }
+
+/* Grid Background */
+.bg-grid {
+    background-image:
+        linear-gradient(rgba(0,255,136,0.03) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(0,255,136,0.03) 1px, transparent 1px);
+    background-size: 60px 60px;
+}
+
+/* Neon Effects */
+.neon-glow { box-shadow: 0 0 20px rgba(0,255,136,0.15), 0 0 60px rgba(0,255,136,0.05); }
+.neon-glow-strong { box-shadow: 0 0 30px rgba(0,255,136,0.3), 0 0 80px rgba(0,255,136,0.12); }
+.neon-text-glow { text-shadow: 0 0 20px rgba(0,255,136,0.4), 0 0 40px rgba(0,255,136,0.15); }
+.neon-border-hover { transition: border-color 0.3s, box-shadow 0.3s; }
+.neon-border-hover:hover { border-color: rgba(0,255,136,0.5); box-shadow: 0 0 25px rgba(0,255,136,0.1); }
+.gradient-text {
+    background: linear-gradient(135deg, #00FF88, #00cc6a, #00FF88);
+    -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;
+}
+
+/* Buttons */
+.btn-neon { position: relative; overflow: hidden; transition: all 0.3s ease; }
+.btn-neon::before { content: ''; position: absolute; inset: 0; background: linear-gradient(135deg, rgba(0,255,136,0.1), transparent); opacity: 0; transition: opacity 0.3s; }
+.btn-neon:hover::before { opacity: 1; }
+.btn-neon:hover { box-shadow: 0 0 30px rgba(0,255,136,0.3); transform: translateY(-2px); }
+
+/* Spec Row */
+.spec-row { transition: background 0.2s; }
+.spec-row:hover { background: rgba(0,255,136,0.05); }
+
+/* Card Animations */
+@keyframes cardIn { 0% { opacity: 0; transform: translateY(30px) scale(0.95); } 100% { opacity: 1; transform: translateY(0) scale(1); } }
+.card-animate { animation: cardIn 0.5s cubic-bezier(0.16, 1, 0.3, 1) forwards; opacity: 0; }
+
+/* View Transitions */
+.view-enter { animation: viewIn 0.5s cubic-bezier(0.16, 1, 0.3, 1) forwards; }
+@keyframes viewIn { 0% { opacity: 0; transform: translateY(20px); } 100% { opacity: 1; transform: translateY(0); } }
+
+/* Floating */
+@keyframes float { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-10px); } }
+.float { animation: float 3s ease-in-out infinite; }
+
+/* ===== HERO VIDEO / SVG ===== */
+.hero-title-wrapper { position: relative; }
+.hero-video-container {
+    position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%);
+    width: 500px; height: 300px; max-width: 90vw; max-height: 60vw;
+    border-radius: 24px; overflow: hidden; opacity: 0.35; pointer-events: none;
+}
+.hero-video { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; mix-blend-mode: screen; }
+.hero-svg-fallback { position: absolute; inset: 0; width: 100%; height: 100%; display: flex; align-items: center; justify-content: center; }
+.hero-title-text { position: relative; z-index: 2; }
+
+/* SVG Animations */
+@keyframes circuitPulse { 0% { stroke-dashoffset: 30; opacity: 0.15; } 50% { stroke-dashoffset: 0; opacity: 0.5; } 100% { stroke-dashoffset: -30; opacity: 0.15; } }
+.circuit-line { stroke-dasharray: 10 20; animation: circuitPulse 3s ease-in-out infinite; }
+@keyframes chipPulse { 0%, 100% { stroke-opacity: 0.3; } 50% { stroke-opacity: 0.9; } }
+.chip-pulse { animation: chipPulse 2s ease-in-out infinite; }
+@keyframes nodePulse { 0%, 100% { opacity: 0.3; } 50% { opacity: 1; } }
+.node-pulse { animation: nodePulse 2s ease-in-out infinite; }
+@keyframes ringPulse { 0% { transform: scale(1); opacity: 0.4; transform-origin: center; } 100% { transform: scale(1.6); opacity: 0; transform-origin: center; } }
+.ring-pulse { animation: ringPulse 3s ease-out infinite; }
+
+/* Animación de Imagen Centrada */
+@keyframes floatingSmoothly {
+    0%, 100% { transform: translateY(0px); }
+    50% { transform: translateY(-25px); }
+}
+
+@keyframes pulseGlow {
+    0%, 100% { opacity: 0.4; }
+    50% { opacity: 1; }
+}
+
+@keyframes rotatingRingAnimation {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+}
+
+@keyframes lineStroke {
+    0%, 100% { stroke-dashoffset: 0; opacity: 0.3; }
+    50% { stroke-dashoffset: 10; opacity: 1; }
+}
+
+.animated-image-container {
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 240px;
+    width: 100%;
+    margin-bottom: 40px;
+    margin-top: -30px;
+}
+
+
+
+.floating-image-wrapper {
+    position: relative;
+    z-index: 2;
+    animation: floatingSmoothly 3s ease-in-out infinite;
+}
+
+.animated-svg-logo {
+    width: 160px;
+    height: 160px;
+    filter: drop-shadow(0 0 20px rgba(0, 255, 136, 0.3));
+    transition: filter 0.3s ease;
+}
+
+.animated-svg-logo:hover {
+    filter: drop-shadow(0 0 30px rgba(0, 255, 136, 0.5));
+}
+
+.pulse-center {
+    animation: pulseGlow 2s ease-in-out infinite;
+}
+
+.line-animate {
+    stroke-dasharray: 15;
+    animation: lineStroke 2s ease-in-out infinite;
+}
+
+/* Mobile adjustments */
+@media (max-width: 640px) {
+    .animated-image-container {
+        height: 180px;
+        margin-bottom: 30px;
+    }
+    
+    .animated-svg-logo {
+        width: 120px;
+        height: 120px;
+    }
+    
+    .pulse-rings {
+        width: 160px;
+        height: 160px;
+    }
+}
+
+/* Mobile Search */
+.mobile-search-closed { max-height: 0; opacity: 0; overflow: hidden; transition: max-height 0.3s ease, opacity 0.3s ease; }
+.mobile-search-open { max-height: 70px; opacity: 1; overflow: hidden; transition: max-height 0.3s ease, opacity 0.3s ease; }
+
+/* PDF View */
+.pdf-page { background: #fafafa; color: #1a1a1a; font-family: 'Inter', sans-serif; }
+.pdf-scroll-area::-webkit-scrollbar { width: 4px; }
+.pdf-scroll-area::-webkit-scrollbar-track { background: transparent; }
+.pdf-scroll-area::-webkit-scrollbar-thumb { background: rgba(0,255,136,0.2); border-radius: 2px; }
+.line-clamp-3 { display: -webkit-box; -webkit-line-clamp: 3; -webkit-box-orient: vertical; overflow: hidden; }
